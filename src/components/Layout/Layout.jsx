@@ -2,21 +2,23 @@
 //import { decrement, increment } from "redux/myValue/slice"
 //import { decrement, increment } from "redux/store"
 
-import { Link, Outlet } from "react-router-dom"
+import { AppBar } from "components/AppBar";
+import { Outlet } from "react-router-dom";
 
 
-export const Layout = ()=>{
-
+export const Layout = () => {
 
     return (
         <div className="container">
-            <nav>
-                <Link to="/login">Log in</Link>
-                <Outlet/>
-            </nav>
+            <AppBar />
+            <Outlet />
         </div>
-    )
-}
+    );
+};
+
+
+
+
 
 // export const Layout = ()=>{
 //     const value = useSelector((state) => state.myValue)

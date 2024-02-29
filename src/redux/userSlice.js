@@ -1,21 +1,21 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
-export  const userSlice = createSlice({
+export const userSlice = createSlice({
   name: 'user',
-    initialState: {
-        login: "",
-        isLoggedIn: false
+  initialState: {
+    login: "",
+    isLoggedIn: false
   },
-    reducers: {
-        logIn(state, action) {
-            // якщо initialState об`єкт
-            state.login = action.payload;
-            state.isLoggedIn = true
-        },
-        logOut(state) {
-            state.login = ""
-            state.isLoggedIn = false
-        }
+  reducers: {
+    logIn(state, action) {
+      // якщо initialState об`єкт
+      state.login = action.payload;
+      state.isLoggedIn = true
+    },
+    logOut(state) {
+      state.login = ""
+      state.isLoggedIn = false
+    }
   },
 });
 

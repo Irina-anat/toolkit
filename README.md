@@ -1,0 +1,1 @@
+Сoncept of global customer state(simple example)
