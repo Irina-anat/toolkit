@@ -10,8 +10,15 @@ const dispatch = useDispatch()
     const handleSubmit = e => {
         e.preventDefault()
         const form = e.currentTarget;
+       
         // console.log(form.elements.login.value)
-        dispatch(logIn(form.elements.login.value))
+        // dispatch(logIn(form.elements.login.value))
+        const loginValue = form.elements.login.value.trim();
+         if (!loginValue) {
+            alert("Enter login")
+             return;
+        };
+        dispatch(logIn(loginValue));
         e.currentTarget.reset();
         navigate("/dashboard", { replace: true });//перенаправ на dashboard page
     };
@@ -19,7 +26,7 @@ const dispatch = useDispatch()
     return (
         <form onSubmit={handleSubmit} >
             <div className="mb-3 mt-3">
-                <input className="form-control" type="text" name="login" autoComplete="off" />
+                <input className="form-control" type="text" name="login" autoComplete="off" placeholder="Login"/>
             </div>
             <button className="btn btn-primary" type="submit">Log in</button>
         </form>
