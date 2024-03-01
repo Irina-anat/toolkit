@@ -1,28 +1,69 @@
-import logger from 'redux-logger';
-import { configureStore } from '@reduxjs/toolkit';
-import { myValueSlice } from './myValue/slice';
-import { userSlice } from './userSlice';
+import { combineReducers, createStore } from 'redux';
+import { devToolsEnhancer } from '@redux-devtools/extension';
 
 
-export const store = configureStore({
-    reducer: {
-        myValue: myValueSlice.reducer,
-        user: userSlice.reducer
-    },
-    // middleware для логування. До списку прошарок +1 logger
-    middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), logger],
-});
+
+const accInitialState = {
+  balance: 100,
+}
+
+const accountReducer = (state = accInitialState, action) => {
+  switch (action.type) {
+    case 'account/deposit':
+      return {
+        ...state,
+        balance: state.balance + action.payload,
+      };
+
+    case 'account/withdraw':
+      return {
+        ...state,
+        balance: state.balance - action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
 
 
-//import { createAction, createReducer } from '@reduxjs/toolkit'
+const rootReducer = combineReducers({
+  account: accountReducer,
+})
 
-// до createSlice
-// export const increment = createAction('myValue/increment')
-// export const decrement = createAction('myValue/decrement')
+const enhancer = devToolsEnhancer();
+export const store = createStore(rootReducer, enhancer);
 
-// console.log(increment(10))
+export const deposit = value => {
+  return {
+    type: 'account/deposit',
+    payload: value,
+  };
+};
 
-// const myReducer = createReducer(10, {
-//     [increment]: (state, action) => state + action.payload,
-//     [decrement]: (state, action) => state - action.payload,
-// })
+export const withdraw = value => {
+  return {
+    type: 'account/withdraw',
+    payload: value,
+  };
+};
+
+
+// const initialState = {
+//   a: {},
+//   account: {
+//     c: {},
+//     balance: 10,
+//   },
+// };
+
+
+// switch (action.type) {
+//     case 'account/deposit':
+//       return {
+//         ...state,
+//         account: {
+//           ...state.account,
+//           balance: state.account.balance + action.payload,
+//         },
+//       };
