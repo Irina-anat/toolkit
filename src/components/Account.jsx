@@ -1,18 +1,19 @@
-import { useDispatch, useSelector } from "react-redux";
-import { deposit, withdraw } from "redux/store";
-
-
+import { useDispatch } from "react-redux";
+import { deposit, withdraw } from "redux/accountSlice";
+import { Balance } from "./Balance";
+import { useState } from "react";
 
 export const Account = () => {
   const dispatch = useDispatch();
-  const balance = useSelector(state => state.account.balance)
-  console.log(balance);
-return (
+  const [inputValue, setInputValue] = useState();
+
+  return (
     <div>
-          {/* <input type="number"/> */}
-    <p>Balance: {balance}</p>
-      <button onClick={()=>{dispatch(deposit(10))}}>Deposit</button>
-      <button onClick={()=>{dispatch(withdraw(5))}}>Withdraw</button>
+      <input type="number" value={inputValue}
+        onChange={evt => setInputValue(Number(evt.target.value))} />
+      <Balance />
+      <button onClick={() => { dispatch(deposit(inputValue)) }}>Deposit</button>
+      <button onClick={() => { dispatch(withdraw(inputValue)) }}>Withdraw</button>
     </div>
   );
 };
