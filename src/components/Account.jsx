@@ -5,7 +5,7 @@ import { useState } from "react";
 
 export const Account = () => {
   const dispatch = useDispatch();
-  const [inputValue, setInputValue] = useState();
+  const [inputValue, setInputValue] = useState(0);
 
   return (
     <div>
